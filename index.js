@@ -24,7 +24,12 @@ main()
   .catch((err) => console.log("❌ Database connection error:", err));
 
 // Routes
-app.get("/", async (req, res) => {
+// Home route (redirects to /chats)
+app.get("/", (req, res) => {
+  res.redirect("/chats");
+});
+
+app.get("/chats", async (req, res) => {
   let chats = await Chat.find();
   res.render("index.ejs", { chats });
 });
